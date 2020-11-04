@@ -27,34 +27,37 @@ public class ContactCreationTests {
   }
 
   @Test
-  public void testUntitledTestCase() throws Exception {
+  public void testContactCreation() throws Exception {
 
     initContactCreation();
-    firstName("Otshel");
-    middleName("Othelovich");
-    lastName("Otchelov");
-    nick("qwerty");
-    title("qwer");
-    company("qwert");
-    companyAddress("qwerty st.");
-    homePhone("+7 123");
-    mobilePhone("+7 124");
-    workPhone("+7 125");
-    fax("+7126");
-    email1("qwer@ta");
-    email2("qwer@ty");
-    email3("qwer@tr");
-    homepage("qwerty.ru");
-    bDay("4", "April", "1981");
-    aDay("4", "April", "2031");
-    addContactToGroup("friends");
-    homeAddress("turistskaya st");
-    //wd.findElement(By.name("theform")).click();
-    numberHouse("12");
-    //wd.findElement(By.name("theform")).click();
-    notes("qwerty");
+    fillContactForm(new ContactDate("Otshel", "Otshelovichc", "Otshelov"));
     submitContactCreation();
     logOut();
+  }
+
+
+  private void fillContactForm(ContactDate contactDate) {
+    firstName(contactDate.getFirstname());
+    middleName(contactDate.getMiddlename());
+    lastName(contactDate.getLastname());
+    /*nick(contactDate.getNick());
+    title(contactDate.getTitle());
+    company(contactDate.getCompany());
+    companyAddress(contactDate.getCompanyAddress());
+    homePhone(contactDate.getHomePhone());
+    mobilePhone(contactDate.getMobilePhone());
+    workPhone(contactDate.getWorkPhone());
+    fax(contactDate.getFax());
+    email1(contactDate.getEmail1());
+    email2(contactDate.getEmail2());
+    email3(contactDate.getEmail3());
+    homepage(contactDate.getHomepage());
+    bDay(contactDate.getDayOfMonth(), contactDate.getMonth(), contactDate.getYearBday());
+    aDay(contactDate.getDayOfMonth(), contactDate.getMonth(), contactDate.getYearAday());
+    addContactToGroup(contactDate.getGroupContact());
+    homeAddress(contactDate.getHomeAddress());
+    numberHouse(contactDate.getHouseaddress());
+    notes(contactDate.getNotes());*/
   }
 
   private void logOut() {
@@ -87,13 +90,12 @@ public class ContactCreationTests {
     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(groupName);
   }
 
-  private void aDay(String dayOfMonth, String monthADay, String yearADay) {
+  private void aDay(String dayOfMonth, String month, String yearADay) {
     wd.findElement(By.name("aday")).click();
-
     new Select(wd.findElement(By.name("aday"))).selectByVisibleText(dayOfMonth);
     wd.findElement(By.name("aday")).click();
     wd.findElement(By.name("amonth")).click();
-    new Select(wd.findElement(By.name("amonth"))).selectByVisibleText(monthADay);
+    new Select(wd.findElement(By.name("amonth"))).selectByVisibleText(month);
     wd.findElement(By.name("amonth")).click();
     wd.findElement(By.name("ayear")).click();
     wd.findElement(By.name("ayear")).clear();
