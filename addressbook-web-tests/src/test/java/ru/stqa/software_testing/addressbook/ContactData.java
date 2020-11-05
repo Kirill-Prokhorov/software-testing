@@ -1,6 +1,6 @@
 package ru.stqa.software_testing.addressbook;
 
-public class ContactDate {
+public class ContactData {
   private final String firstname;
   private final String middlename;
   private final String lastname;
@@ -25,7 +25,7 @@ public class ContactDate {
   private final String houseaddress;
   private final String notes;
 
-  public ContactDate(String firstname, String middlename, String lastname) {
+  public ContactData(String firstname, String middlename, String lastname) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -51,7 +51,7 @@ public class ContactDate {
     this.notes = null;
   }
 
-  public ContactDate(String firstname, String middlename, String lastname, String nick, String title, String company, String companyAddress, String homePhone, String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homepage, String dayOfMonth, String month, String yearBday, String yearAday, String groupContact, String homeAddress, String houseaddress, String notes) {
+  public ContactData(String firstname, String middlename, String lastname, String nick, String title, String company, String companyAddress, String homePhone, String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homepage, String dayOfMonth, String month, String yearBday, String yearAday, String groupContact, String homeAddress, String houseaddress, String notes) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;

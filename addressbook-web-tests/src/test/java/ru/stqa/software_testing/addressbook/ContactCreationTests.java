@@ -30,34 +30,34 @@ public class ContactCreationTests {
   public void testContactCreation() throws Exception {
 
     initContactCreation();
-    fillContactForm(new ContactDate("Otshel", "Otshelovichc", "Otshelov"));
+    fillContactForm(new ContactData("Otshel", "Otshelovichc", "Otshelov"));
     submitContactCreation();
     logOut();
   }
 
 
-  private void fillContactForm(ContactDate contactDate) {
-    firstName(contactDate.getFirstname());
-    middleName(contactDate.getMiddlename());
-    lastName(contactDate.getLastname());
-    /*nick(contactDate.getNick());
-    title(contactDate.getTitle());
-    company(contactDate.getCompany());
-    companyAddress(contactDate.getCompanyAddress());
-    homePhone(contactDate.getHomePhone());
-    mobilePhone(contactDate.getMobilePhone());
-    workPhone(contactDate.getWorkPhone());
-    fax(contactDate.getFax());
-    email1(contactDate.getEmail1());
-    email2(contactDate.getEmail2());
-    email3(contactDate.getEmail3());
-    homepage(contactDate.getHomepage());
-    bDay(contactDate.getDayOfMonth(), contactDate.getMonth(), contactDate.getYearBday());
-    aDay(contactDate.getDayOfMonth(), contactDate.getMonth(), contactDate.getYearAday());
-    addContactToGroup(contactDate.getGroupContact());
-    homeAddress(contactDate.getHomeAddress());
-    numberHouse(contactDate.getHouseaddress());
-    notes(contactDate.getNotes());*/
+  private void fillContactForm(ContactData contactData) {
+    firstName(contactData.getFirstname());
+    middleName(contactData.getMiddlename());
+    lastName(contactData.getLastname());
+    /*nick(contactData.getNick());
+    title(contactData.getTitle());
+    company(contactData.getCompany());
+    companyAddress(contactData.getCompanyAddress());
+    homePhone(contactData.getHomePhone());
+    mobilePhone(contactData.getMobilePhone());
+    workPhone(contactData.getWorkPhone());
+    fax(contactData.getFax());
+    email1(contactData.getEmail1());
+    email2(contactData.getEmail2());
+    email3(contactData.getEmail3());
+    homepage(contactData.getHomepage());
+    bDay(contactData.getDayOfMonth(), contactData.getMonth(), contactData.getYearBday());
+    aDay(contactData.getDayOfMonth(), contactData.getMonth(), contactData.getYearAday());
+    addContactToGroup(contactData.getGroupContact());
+    homeAddress(contactData.getHomeAddress());
+    numberHouse(contactData.getHouseaddress());
+    notes(contactData.getNotes());*/
   }
 
   private void logOut() {
