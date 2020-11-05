@@ -5,36 +5,28 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
-public class ApplicationManager extends GroupHelper {
+public class ApplicationManager {
+
+  WebDriver wd;
+  private SessionHelper sessionHelper;
+  private NavigationHelper navigationHelper;
+  private GroupHelper groupHelper;
 
   public void init() {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
-    login("admin", "secret");
+    groupHelper = new GroupHelper(wd);
+    navigationHelper = new NavigationHelper(wd);
+    sessionHelper = new SessionHelper(wd);
+    sessionHelper.login("admin", "secret");
   }
 
-  public void login(String username, String password) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
 
-  public void logOut() {
-    wd.findElement(By.linkText("Logout")).click();
-  }
 
-  public void gotoGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
-  }
 
   public void stop() {
     wd.quit();
@@ -57,5 +49,15 @@ public class ApplicationManager extends GroupHelper {
       return false;
     }
   }
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
+  }
 
+  public GroupHelper getGroupHelper() {
+    return groupHelper;
+  }
+
+  public NavigationHelper getNavigationHelper() {
+    return navigationHelper;
+  }
 }
