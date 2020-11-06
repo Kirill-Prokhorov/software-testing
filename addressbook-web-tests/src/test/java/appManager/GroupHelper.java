@@ -13,7 +13,7 @@ public class GroupHelper {
   }
 
   public void returnToGroupPage() {
-    wd.findElement(By.linkText("groups")).click();
+    wd.findElement(By.linkText("group page")).click();
   }
 
   public void submitGroupCreation() {

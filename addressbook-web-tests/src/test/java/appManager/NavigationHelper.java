@@ -12,6 +12,6 @@ public class NavigationHelper {
   }
 
   public void gotoGroupPage() {
-    wd.findElement(By.linkText("group page")).click();
+    wd.findElement(By.linkText("groups")).click();
   }
 }
