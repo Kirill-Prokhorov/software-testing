@@ -1,54 +1,35 @@
-package ru.stqa.software_testing.addressbook;
+package model;
 
 public class ContactData {
-  public String firstname;
-  public String middlename;
-  public String lastname;
-  public String nick;
-  public String title;
-  public String company;
-  public String companyAddress;
-  public String homePhone;
-  public String mobilePhone;
-  public String workPhone;
-  public String fax;
-  public String email1;
-  public String email2;
-  public String email3;
-  public String homepage;
-  public String dayOfMonth;
-  public String month;
-  public String yearBday;
-  public String yearAday;
-  public String groupContact;
-  public String homeAddress;
-  public String houseaddress;
-  public String notes;
+  public String firstname = null;;
+  public String middlename = null;;
+  public String lastname = null;;
+  public String nick = null;;
+  public String title = null;;
+  public String company = null;;
+  public String companyAddress = null;;
+  public String homePhone = null;;
+  public String mobilePhone = null;;
+  public String workPhone = null;;
+  public String fax = null;;
+  public String email1 = null;;
+  public String email2 = null;;
+  public String email3 = null;;
+  public String homepage = null;;
+  public String dayOfMonth = null;;
+  public String month = null;;
+  public String yearBday = null;;
+  public String yearAday = null;;
+  public String groupContact = null;;
+  public String homeAddress = null;;
+  public String houseaddress = null;;
+  public String notes = null;;
 
   public ContactData(String firstname, String middlename, String lastname) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
-    this.nick = null;
-    this.title = null;
-    this.company = null;
-    this.companyAddress = null;
-    this.homePhone = null;
-    this.mobilePhone = null;
-    this.workPhone = null;
-    this.fax = null;
-    this.email1 = null;
-    this.email2 = null;
-    this.email3 = null;
-    this.homepage = null;
-    this.dayOfMonth = null;
-    this.month = null;
-    this.yearBday = null;
-    this.yearAday = null;
-    this.groupContact = null;
-    this.homeAddress = null;
-    this.houseaddress = null;
-    this.notes = null;
+
   }
 
   public ContactData(String firstname, String middlename, String lastname, String nick, String title, String company, String companyAddress, String homePhone, String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homepage, String dayOfMonth, String month, String yearBday, String yearAday, String groupContact, String homeAddress, String houseaddress, String notes) {
@@ -82,7 +63,7 @@ public class ContactData {
     return firstname;
   }
 
-  public String getMiddlename() {
+  public String getMiddleName() {
     return middlename;
   }
 
@@ -146,11 +127,11 @@ public class ContactData {
     return month;
   }
 
-  public String getYearBday() {
+  public String getYearBDay() {
     return yearBday;
   }
 
-  public String getYearAday() {
+  public String getYearADay() {
     return yearAday;
   }
 
@@ -162,7 +143,7 @@ public class ContactData {
     return homeAddress;
   }
 
-  public String getHouseaddress() {
+  public String getHouseAddress() {
     return houseaddress;
   }
 
