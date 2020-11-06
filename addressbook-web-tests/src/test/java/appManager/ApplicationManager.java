@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   WebDriver wd;
-  public boolean acceptNextAlert = true;
   public SessionHelper sessionHelper;
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
@@ -47,21 +46,6 @@ public class ApplicationManager {
       return true;
     } catch (NoAlertPresentException e) {
       return false;
-    }
-  }
-
-  public String closeAlertAndGetItsText() {
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
     }
   }
 

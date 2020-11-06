@@ -1,13 +1,17 @@
 package appManager;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import model.ContactData;
 
+import static org.testng.Assert.assertTrue;
+
 public class ContactHelper {
 
   public WebDriver wd;
+  public boolean acceptNextAlert = true;
 
   public ContactHelper(WebDriver wd) {
 
@@ -51,6 +55,16 @@ public class ContactHelper {
     numberHouse(contactData.getHouseAddress());
     notes(contactData.getNotes());
 
+  }
+
+  public void selectContact() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  public void deleteSelectedContact() {
+    wd.findElement(By.xpath("//input[@value='Delete']")).click();
+    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
+    wd.findElement(By.name("MainForm")).click();
   }
 
   public void notes(String text) {
@@ -191,5 +205,20 @@ public class ContactHelper {
 
   public void submitContactCreation() {
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  public String closeAlertAndGetItsText() {
+    try {
+      Alert alert = wd.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
   }
 }
