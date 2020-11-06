@@ -1,9 +1,6 @@
 package appManager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -11,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   WebDriver wd;
+  public boolean acceptNextAlert = true;
   public SessionHelper sessionHelper;
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
@@ -51,6 +49,22 @@ public class ApplicationManager {
       return false;
     }
   }
+
+  public String closeAlertAndGetItsText() {
+    try {
+      Alert alert = wd.switchTo().alert();
+      String alertText = alert.getText();
+      if (acceptNextAlert) {
+        alert.accept();
+      } else {
+        alert.dismiss();
+      }
+      return alertText;
+    } finally {
+      acceptNextAlert = true;
+    }
+  }
+
   public SessionHelper getSessionHelper() {
     return sessionHelper;
   }
