@@ -69,8 +69,7 @@ public class ContactHelper extends HelperBase {
   public void deleteSelectedContact() {
 
     click(By.xpath("//input[@value='Delete']"));
-    assertTrue(closeAlertAndGetItsText().matches("^Delete 1 addresses[\\s\\S]$"));
-    click(By.name("MainForm"));
+    wd.switchTo().alert().accept();
 
   }
 
@@ -119,6 +118,12 @@ public class ContactHelper extends HelperBase {
     findAndSelect(By.name("bmonth"), month);
     click(By.name("bmonth"));
     type(By.name("byear"), yearBDay);
+
+  }
+
+  public void returnToHomePage() {
+
+    click(By.linkText("home page"));
 
   }
 
@@ -218,4 +223,13 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public void initContactModification() {
+
+    click(By.xpath("//img[@alt='Edit']"));
+
+  }
+  public void submitContactModification() {
+
+    click(By.name("update"));
+  }
 }

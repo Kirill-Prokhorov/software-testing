@@ -8,7 +8,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class HelperBase {
   public WebDriver wd;
-  public boolean acceptNextAlert = true;
 
   public HelperBase(WebDriver wd) {
     this.wd = wd;
@@ -36,18 +35,5 @@ public class HelperBase {
   protected void findAndSelect(By locator, String text) {
     new Select(wd.findElement(locator)).selectByVisibleText(text);
   }
-  public String closeAlertAndGetItsText() {
-    try {
-      Alert alert = wd.switchTo().alert();
-      String alertText = alert.getText();
-      if (acceptNextAlert) {
-        alert.accept();
-      } else {
-        alert.dismiss();
-      }
-      return alertText;
-    } finally {
-      acceptNextAlert = true;
-    }
-  }
+
 }
