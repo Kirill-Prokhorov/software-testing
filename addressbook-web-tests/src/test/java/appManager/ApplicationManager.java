@@ -11,9 +11,9 @@ import java.util.concurrent.TimeUnit;
 public class ApplicationManager {
 
   WebDriver wd;
-  private SessionHelper sessionHelper;
-  private NavigationHelper navigationHelper;
-  private GroupHelper groupHelper;
+  public SessionHelper sessionHelper;
+  public NavigationHelper navigationHelper;
+  public GroupHelper groupHelper;
 
   public void init() {
     wd = new FirefoxDriver();

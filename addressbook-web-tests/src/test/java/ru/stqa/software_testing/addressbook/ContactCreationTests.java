@@ -7,7 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 public class ContactCreationTests {
-  private WebDriver wd;
+  public WebDriver wd;
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
@@ -16,7 +16,7 @@ public class ContactCreationTests {
     wd.get("http://localhost/addressbook");
     login("admin", "secret");
   }
-  private void login(String user, String password) {
+  public void login(String user, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys(user);
@@ -36,7 +36,7 @@ public class ContactCreationTests {
   }
 
 
-  private void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData) {
     firstName(contactData.getFirstname());
     middleName(contactData.getMiddlename());
     lastName(contactData.getLastname());

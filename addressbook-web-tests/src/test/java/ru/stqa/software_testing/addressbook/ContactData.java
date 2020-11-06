@@ -1,29 +1,29 @@
 package ru.stqa.software_testing.addressbook;
 
 public class ContactData {
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String nick;
-  private final String title;
-  private final String company;
-  private final String companyAddress;
-  private final String homePhone;
-  private final String mobilePhone;
-  private final String workPhone;
-  private final String fax;
-  private final String email1;
-  private final String email2;
-  private final String email3;
-  private final String homepage;
-  private final String dayOfMonth;
-  private final String month;
-  private final String yearBday;
-  private final String yearAday;
-  private final String groupContact;
-  private final String homeAddress;
-  private final String houseaddress;
-  private final String notes;
+  public String firstname;
+  public String middlename;
+  public String lastname;
+  public String nick;
+  public String title;
+  public String company;
+  public String companyAddress;
+  public String homePhone;
+  public String mobilePhone;
+  public String workPhone;
+  public String fax;
+  public String email1;
+  public String email2;
+  public String email3;
+  public String homepage;
+  public String dayOfMonth;
+  public String month;
+  public String yearBday;
+  public String yearAday;
+  public String groupContact;
+  public String homeAddress;
+  public String houseaddress;
+  public String notes;
 
   public ContactData(String firstname, String middlename, String lastname) {
     this.firstname = firstname;

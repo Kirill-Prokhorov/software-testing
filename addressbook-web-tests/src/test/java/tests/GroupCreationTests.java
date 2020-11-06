@@ -1,7 +1,8 @@
 package tests;
 
-import org.testng.annotations.*;
 import model.GroupData;
+import org.testng.annotations.*;
+
 
 
 public class GroupCreationTests extends TestBase {
