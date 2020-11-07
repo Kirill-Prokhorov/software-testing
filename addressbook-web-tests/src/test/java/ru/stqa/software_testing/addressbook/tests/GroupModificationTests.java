@@ -9,11 +9,12 @@ public class GroupModificationTests extends TestBase {
   public void groupModification() {
 
     application.getNavigationHelper().gotoGroupPage();
-    application.getGroupHelper().selectGroup();
-    application.getGroupHelper().initGroupModification();
-    application.getGroupHelper().fillGroupForm(new GroupData("change1", "test", "change3"));
-    application.getGroupHelper().submitGroupModification();
-    application.getGroupHelper().returnToGroupPage();
+    if(! application.getGroupHelper().isThereAGroup()){
+      application.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
+    }
+    application.getGroupHelper().modificationGroup(new GroupData("change1", "test", "change3"));
+    application.getSessionHelper().logOut();
+
   }
 
 }

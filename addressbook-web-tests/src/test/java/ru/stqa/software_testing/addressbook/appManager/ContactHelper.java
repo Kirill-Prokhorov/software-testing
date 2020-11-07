@@ -241,4 +241,27 @@ public class ContactHelper extends HelperBase {
 
     click(By.name("update"));
   }
+
+  public boolean isThereAContact() {
+    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public void contactCreation(ContactData contact, boolean b) {
+    initContactCreation();
+    fillContactForm(contact, b);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void contactModification(ContactData contact, boolean b) {
+    initContactModification();
+    fillContactForm(contact, b);
+    submitContactModification();
+    returnToHomePage();
+  }
+
+  public void deleteContact() {
+    selectContact();
+    deleteSelectedContact();
+  }
 }
