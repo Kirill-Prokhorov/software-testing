@@ -25,10 +25,10 @@ public class ContactData {
   public String houseaddress = null;;
   public String notes = null;;
 
-  public ContactData(String firstname, String middlename, String lastname) {
+  public ContactData(String firstname, String lastname, String groupContact) {
     this.firstname = firstname;
-    this.middlename = middlename;
     this.lastname = lastname;
+    this. groupContact = groupContact;
 
   }
 

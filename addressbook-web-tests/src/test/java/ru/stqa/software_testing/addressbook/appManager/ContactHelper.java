@@ -2,9 +2,11 @@ package ru.stqa.software_testing.addressbook.appManager;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 
 import static org.testng.Assert.assertTrue;
@@ -24,11 +26,17 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
 
     firstName(contactData.getFirstname());
-    middleName(contactData.getMiddleName());
     lastName(contactData.getLastname());
+
+    if(creation){
+      addContactToGroup(contactData.getGroupContact());
+    }
+    else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
 
   }
 
@@ -37,7 +45,6 @@ public class ContactHelper extends HelperBase {
     firstName(contactData.getFirstname());
     middleName(contactData.getMiddleName());
     lastName(contactData.getLastname());
-    firstName(contactData.getFirstname());
     middleName(contactData.getMiddleName());
     lastName(contactData.getLastname());
     nick(contactData.getNick());
@@ -93,6 +100,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void addContactToGroup(String groupName) {
+
 
     findAndSelect(By.name("new_group"), groupName);
 
