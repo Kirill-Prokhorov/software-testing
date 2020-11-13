@@ -1,9 +1,15 @@
 package ru.stqa.software_testing.addressbook.appManager;
 
+import kotlin.collections.ArrayDeque;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import javax.swing.text.html.parser.Element;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupHelper extends HelperBase {
 
@@ -76,5 +82,16 @@ public class GroupHelper extends HelperBase {
 
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<GroupData> getGroupList() {
+    List<GroupData> groups = new ArrayList<GroupData>();
+    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+    for (WebElement element : elements){
+      String name = element.getText();
+      GroupData group = new GroupData(name, null, null);
+      groups.add(group);
+    }
+    return groups;
   }
 }
