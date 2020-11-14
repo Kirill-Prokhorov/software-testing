@@ -1,6 +1,9 @@
 package ru.stqa.software_testing.addressbook.model;
 
+import java.util.Objects;
+
 public class ContactData {
+  public int id = Integer.MAX_VALUE;
   public String firstname = null;;
   public String middlename = null;;
   public String lastname = null;;
@@ -15,6 +18,29 @@ public class ContactData {
   public String email1 = null;;
   public String email2 = null;;
   public String email3 = null;;
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return Objects.equals(firstname, that.firstname) &&
+            Objects.equals(lastname, that.lastname);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(firstname, lastname);
+  }
+
   public String homepage = null;;
   public String dayOfMonth = null;;
   public String month = null;;
@@ -25,6 +51,17 @@ public class ContactData {
   public String houseaddress = null;;
   public String notes = null;;
 
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public ContactData(String firstname, String lastname) {
+    this.firstname = firstname;
+    this.lastname = lastname;
+    //this.id = id;
+
+
+  }
   public ContactData(String firstname, String lastname, String groupContact) {
     this.firstname = firstname;
     this.lastname = lastname;
@@ -149,5 +186,9 @@ public class ContactData {
 
   public String getNotes() {
     return notes;
+  }
+
+  public  int getId() {
+    return id;
   }
 }

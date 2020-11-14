@@ -16,7 +16,7 @@ public class ContactCreationTests extends TestBase {
     }
     application.getNavigationHelper().gotoHomePage();
     application.getContactHelper().contactCreation(new ContactData("Otshel",
-            "Otshelov", "Test"), true);
+            "Otshelov", "[none]"), true);
     application.getSessionHelper().logOut();
   }
 

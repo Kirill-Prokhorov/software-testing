@@ -1,13 +1,14 @@
 package ru.stqa.software_testing.addressbook.appManager;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
+import ru.stqa.software_testing.addressbook.model.GroupData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -263,5 +264,25 @@ public class ContactHelper extends HelperBase {
   public void deleteContact() {
     selectContact();
     deleteSelectedContact();
+  }
+
+  public List<ContactData> getContactList() {
+
+    List<ContactData> contacts = new ArrayList<>();
+    List<WebElement> elementsTR = wd.findElements(By.cssSelector("tbody > tr "));
+    for (WebElement element : elementsTR){
+      List<WebElement> elementsTD = element.findElements(By.cssSelector("tr > td"));
+      if(elementsTD.size() != 0){
+
+        String lastname = elementsTD.get(1).getText();
+        String firstname = elementsTD.get(2).getText();
+        int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
+        ContactData contact = new ContactData(firstname, lastname);
+        contact.setId(id);
+        contacts.add(contact);
+
+      }
+    }
+    return contacts;
   }
 }
