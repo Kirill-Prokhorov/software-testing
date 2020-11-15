@@ -23,7 +23,6 @@ public class ContactCreationTests extends TestBase {
 
     List<ContactData> before = application.getContactHelper().getContactList();
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    before.sort(byId);
     ContactData contact = new ContactData( "Created  ",
             "Contact ");
     application.getContactHelper().contactCreation(contact, true);
