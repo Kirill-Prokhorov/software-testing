@@ -24,13 +24,13 @@ public class ContactCreationTests extends TestBase {
     List<ContactData> before = application.getContactHelper().getContactList();
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
     before.sort(byId);
-    ContactData contact = new ContactData( before.get(before.size()-1).getId() + 1,"Created  ",
+    ContactData contact = new ContactData( "Created  ",
             "Contact ");
     application.getContactHelper().contactCreation(contact, true);
 
     List<ContactData> after = application.getContactHelper().getContactList();
     Assert.assertEquals( after.size(), before.size()+1);
-    
+
     after.sort(byId);
     before.add(after.get(after.size()-1));
 
