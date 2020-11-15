@@ -258,6 +258,7 @@ public class ContactHelper extends HelperBase {
     initContactModification();
     fillContactForm(contact, b);
     submitContactModification();
+   // contact.setId(id);
     returnToHomePage();
   }
 
@@ -277,8 +278,8 @@ public class ContactHelper extends HelperBase {
         String lastname = elementsTD.get(1).getText();
         String firstname = elementsTD.get(2).getText();
         int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
-        ContactData contact = new ContactData(firstname, lastname);
-        contact.setId(id);
+        ContactData contact = new ContactData(id, firstname, lastname);
+        //contact.setId(id);
         contacts.add(contact);
 
       }

@@ -25,14 +25,14 @@ public class ContactModificationTests extends TestBase {
 
     }
     List<ContactData> before = application.getContactHelper().getContactList();
-    ContactData contact = new ContactData(  "Changed First Name",
-            "Changed Last Name");
+    ContactData contact = new ContactData( before.get(0).getId(), "Changed  ",
+            "Changed Last ");
     application.getContactHelper().contactModification(contact, false);
     List<ContactData> after = application.getContactHelper().getContactList();
     Assert.assertEquals( after.size(), before.size());
 
     before.remove(0);
-    before.add(0, contact);
+    before.add(0, after.get(0));
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
     before.sort(byId);
     after.sort(byId);
