@@ -230,14 +230,7 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("(//input[@name='submit'])[2]"));
   }
 
-  public void selectContact(int index) {
-
-    wd.findElements(By.name("selected[]")).get(index).click();
-
-  }
-
-
-  public void initContactModification(int index) {
+    public void initContactModification(int index) {
 
     wd.findElements(By.cssSelector("[alt = Edit]")).get(index).click();
 
@@ -261,14 +254,9 @@ public class ContactHelper extends HelperBase {
     initContactModification(index);
     fillContactForm(contact, b);
     submitContactModification();
-   // contact.setId(id);
     returnToHomePage();
   }
 
-  public void delete(int index) {
-    selectContact(index);
-    deleteSelectedContact();
-  }
 
   public List<ContactData> list() {
 
@@ -302,5 +290,26 @@ public class ContactHelper extends HelperBase {
 
     }
     return contacts;
+  }
+
+  public void selectContact(int index) {
+
+    wd.findElements(By.name("selected[]")).get(index).click();
+
+  }
+  public void selectContactbyId(int id) {
+
+    wd.findElement(By.cssSelector("input[ value = '" + id + "'")).click();
+
+  }
+
+  public void delete(ContactData contact) {
+    selectContactbyId(contact.getId());
+    deleteSelectedContact();
+  }
+
+  public void delete(int index) {
+    selectContact(index);
+    deleteSelectedContact();
   }
 }

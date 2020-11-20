@@ -27,13 +27,12 @@ public class ContactDeletionTests extends TestBase {
   public void testContactDeletion() throws Exception {
 
     List<ContactData> before = application.contact().list();
-    int index = before.size()-1;
-   // Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    application.contact().delete(before.size()-1);
+    ContactData deletedContact = before.iterator().next();
+    application.contact().delete(deletedContact);
     application.goTo().homePage();
     List<ContactData> after = application.contact().list();
     Assert.assertEquals( after.size(), before.size()-1);
-    before.remove(index);
+    before.remove(deletedContact);
     Assert.assertEquals(before, after);
 
 
