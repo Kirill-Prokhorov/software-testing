@@ -8,7 +8,9 @@ import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -279,6 +281,23 @@ public class ContactHelper extends HelperBase {
         String firstname = elementsTD.get(2).getText();
         int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
         contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+
+
+    }
+    return contacts;
+  }
+
+  public Set<ContactData> set() {
+
+    Set<ContactData> contacts = new HashSet<>();
+    List<WebElement> elementsTR = wd.findElements(By.cssSelector("[name = entry]"));//xpath(//tr[@name = 'entry'])
+    for (WebElement element : elementsTR){
+
+      List<WebElement> elementsTD = element.findElements(By.cssSelector("td"));
+      String lastname = elementsTD.get(1).getText();
+      String firstname = elementsTD.get(2).getText();
+      int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
+      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
 
 
     }

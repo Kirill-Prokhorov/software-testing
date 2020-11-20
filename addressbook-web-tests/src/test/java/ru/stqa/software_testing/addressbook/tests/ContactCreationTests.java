@@ -7,6 +7,7 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
@@ -24,20 +25,17 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation() throws Exception {
 
 
-    List<ContactData> before = application.contact().list();
-    Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
+    Set<ContactData> before = application.contact().set();
     ContactData contact = new ContactData().withFirstname("Created").withLastname("Contact");
     application.contact().create(contact, true);
     application.goTo().homePage();
 
-    List<ContactData> after = application.contact().list();
+    Set<ContactData> after = application.contact().set();
     Assert.assertEquals( after.size(), before.size()+1);
 
-    after.sort(byId);
-    contact.withId(after.get(after.size()-1).getId());
-    before.add(contact);//after.get(after.size()-1)
 
-    before.sort(byId);
+    contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
+    before.add(contact);
     Assert.assertEquals(before, after);
 
   }
