@@ -6,6 +6,7 @@ import org.testng.annotations.*;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 
 public class GroupCreationTests extends TestBase {
@@ -15,19 +16,15 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() throws Exception {
 
     application.goTo().groupPage();
-    List<GroupData> before = application.group().list();
+    Set<GroupData> before = application.group().set();
     GroupData group = new GroupData().withName("Test00").withHeader("test2");
     application.group().create(group);
     application.goTo().groupPage();
-    List<GroupData> after = application.group().list();
+    Set<GroupData> after = application.group().set();
     Assert.assertEquals( after.size(), before.size() + 1);
 
-
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
-    after.sort(byId);
-    group.withId(after.get(after.size() - 1).getId());
+    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     before.add(group);
-    before.sort(byId);
     Assert.assertEquals( before, after);
   }
 
