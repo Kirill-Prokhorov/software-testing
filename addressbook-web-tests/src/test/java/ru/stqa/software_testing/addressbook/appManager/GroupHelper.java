@@ -41,14 +41,6 @@ public class GroupHelper extends HelperBase {
     click(By.name("new"));
   }
 
-  public void deleteSelectedGroups() {
-    click(By.name("delete"));
-  }
-
-  public void selectGroup(int id) {
-    wd.findElements(By.name("selected[]")).get(id).click();
-
-  }
 
   public void initGroupModification() {
 
@@ -63,11 +55,6 @@ public class GroupHelper extends HelperBase {
     submitGroupCreation();
 
     
-  }
-  public void delete(int index){
-    selectGroup(index);
-    deleteSelectedGroups();
-    returnToGroupPage();
   }
 
   public boolean isThereAGroup() {
@@ -106,5 +93,30 @@ public class GroupHelper extends HelperBase {
       groups.add(new GroupData().withId(id).withName(name));
     }
     return groups;
+  }
+
+  public void delete(int index){
+    selectGroup(index);
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
+  public void delete(GroupData group) {
+    selectGroupById(group.getId());
+    deleteSelectedGroups();
+    returnToGroupPage();
+  }
+
+  private void selectGroupById(int id) {
+    wd.findElement(By.cssSelector("input[ value = '" + id + "'")).click();
+  }
+
+  public void deleteSelectedGroups() {
+    click(By.name("delete"));
+  }
+
+  public void selectGroup(int index) {
+    wd.findElements(By.name("selected[]")).get(index).click();
+
   }
 }
