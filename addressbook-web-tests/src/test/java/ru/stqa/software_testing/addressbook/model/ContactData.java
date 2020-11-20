@@ -29,62 +29,6 @@ public class ContactData {
   public String notes = null;
 
 
-  public ContactData(String firstname, String lastname, String groupContact) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.groupContact = groupContact;
-
-
-  }
-  public ContactData(int id, String firstname, String lastname) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.id = id;
-
-
-  }
-  public ContactData(String firstname, String lastname) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.id = id;
-
-
-  }
-  public ContactData(int id, String firstname, String lastname, String groupContact) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this. groupContact = groupContact;
-    this.id = id;
-
-  }
-
-  public ContactData(String firstname, String middlename, String lastname, String nick, String title, String company, String companyAddress, String homePhone, String mobilePhone, String workPhone, String fax, String email1, String email2, String email3, String homepage, String dayOfMonth, String month, String yearBday, String yearAday, String groupContact, String homeAddress, String houseaddress, String notes) {
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nick = nick;
-    this.title = title;
-    this.company = company;
-    this.companyAddress = companyAddress;
-    this.homePhone = homePhone;
-    this.mobilePhone = mobilePhone;
-    this.workPhone = workPhone;
-    this.fax = fax;
-    this.email1 = email1;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.homepage = homepage;
-    this.dayOfMonth = dayOfMonth;
-    this.month = month;
-    this.yearBday = yearBday;
-    this.yearAday = yearAday;
-    this.groupContact = groupContact;
-    this.homeAddress = homeAddress;
-    this.houseaddress = houseaddress;
-    this.notes = notes;
-  }
-
-
   public String getFirstname() {
     return firstname;
   }
@@ -189,6 +133,7 @@ public class ContactData {
             '}';
   }
 
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -204,8 +149,44 @@ public class ContactData {
     return Objects.hash(id, firstname, lastname);
   }
 
-  public void setId(int id) {
+  public ContactData withId(int id) {
     this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withNick(String nick) {
+    this.nick = nick;
+    return this;
+  }
+
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withEmail1(String email1) {
+    this.email1 = email1;
+    return this;
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
   }
 
 }

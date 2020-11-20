@@ -10,29 +10,31 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
+  @BeforeMethod
+  public void ensurePreconditions(){
+    application.goTo().groupPage();
+    if(application.group().list().size() == 0){
+      application.group().create(new GroupData().withName("Test").withFooter("test3"));
+    }
+    application.goTo().homePage();
+  }
+
 
   @Test
   public void testContactCreation() throws Exception {
 
-    application.getNavigationHelper().gotoGroupPage();
-    if(! application.getGroupHelper().isThereAGroup()){
-      application.getGroupHelper().createGroup(new GroupData("Test", null, "test3"));
-    }
-    application.getNavigationHelper().gotoHomePage();
 
-
-    List<ContactData> before = application.getContactHelper().getContactList();
+    List<ContactData> before = application.contact().list();
     Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-    ContactData contact = new ContactData( "Created",
-            "Contact");
-    application.getContactHelper().contactCreation(contact, true);
-    application.getNavigationHelper().gotoHomePage();
+    ContactData contact = new ContactData().withFirstname("Created").withLastname("Contact");
+    application.contact().create(contact, true);
+    application.goTo().homePage();
 
-    List<ContactData> after = application.getContactHelper().getContactList();
+    List<ContactData> after = application.contact().list();
     Assert.assertEquals( after.size(), before.size()+1);
 
     after.sort(byId);
-    contact.setId(after.get(after.size()-1).getId());
+    contact.withId(after.get(after.size()-1).getId());
     before.add(contact);//after.get(after.size()-1)
 
     before.sort(byId);
