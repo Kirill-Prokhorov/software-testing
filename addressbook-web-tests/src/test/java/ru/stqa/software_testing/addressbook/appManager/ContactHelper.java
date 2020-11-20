@@ -252,7 +252,6 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact, b);
     submitContactCreation();
-    returnToHomePage();
   }
 
   public void contactModification(ContactData contact, boolean b) {
@@ -271,11 +270,10 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> getContactList() {
 
     List<ContactData> contacts = new ArrayList<>();
-    List<WebElement> elementsTR = wd.findElements(By.cssSelector("tbody > tr "));
+    List<WebElement> elementsTR = wd.findElements(By.cssSelector("[name = entry]"));//tr[@name = 'entry']
     for (WebElement element : elementsTR){
-      List<WebElement> elementsTD = element.findElements(By.cssSelector("tr > td"));
-      if(elementsTD.size() != 0){
 
+      List<WebElement> elementsTD = element.findElements(By.cssSelector("td"));
         String lastname = elementsTD.get(1).getText();
         String firstname = elementsTD.get(2).getText();
         int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
@@ -283,7 +281,7 @@ public class ContactHelper extends HelperBase {
         //contact.setId(id);
         contacts.add(contact);
 
-      }
+
     }
     return contacts;
   }
