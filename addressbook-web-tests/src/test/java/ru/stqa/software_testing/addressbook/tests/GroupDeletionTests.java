@@ -9,14 +9,18 @@ import java.util.List;
 
 public class GroupDeletionTests extends TestBase {
 
-
-  @Test
-  public void testGroupDeletion() throws Exception {
-
+  @BeforeMethod
+  public void ensurePreconditions(){
     application.getNavigationHelper().gotoGroupPage();
     if(! application.getGroupHelper().isThereAGroup()){
       application.getGroupHelper().createGroup(new GroupData("test1", null, "test3"));
     }
+  }
+
+
+  @Test
+  public void testGroupDeletion() throws Exception {
+
     List<GroupData> before = application.getGroupHelper().getGroupList();
 
     application.getGroupHelper().deleteGroup(before.size() - 1);
@@ -26,7 +30,7 @@ public class GroupDeletionTests extends TestBase {
     before.remove(before.size() - 1);
     Assert.assertEquals(before, after);
 
-    application.getSessionHelper().logOut();
+
 
   }
 

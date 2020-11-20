@@ -72,7 +72,7 @@ public class GroupHelper extends HelperBase {
     return isElementPresent(By.name("selected[]"));
   }
 
-  public void modificationGroup(GroupData group, int id) {
+  public void modificationGroup(int id ,GroupData group) {
     selectGroup(id);
     initGroupModification();
     fillGroupForm(group);
