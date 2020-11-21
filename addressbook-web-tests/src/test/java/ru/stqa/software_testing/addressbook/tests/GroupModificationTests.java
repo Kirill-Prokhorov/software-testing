@@ -7,6 +7,7 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class GroupModificationTests extends TestBase {
 
@@ -24,22 +25,18 @@ public class GroupModificationTests extends TestBase {
 
 
 
-    List<GroupData> before = application.group().list();
-    int index = before.size() - 1;
+    Set<GroupData> before = application.group().set();
+    GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .withId(before.get(before.size() - 1).getId()).withName("change1").withHeader("test").withFooter("change3");
-    application.group().modify(index, group );
+            .withId(modifiedGroup.getId()).withName("change1").withHeader("test").withFooter("change3");
+    application.group().modify(group );
     application.goTo().groupPage();
-    List<GroupData> after = application.group().list();
+    Set<GroupData> after = application.group().set();
     Assert.assertEquals( after.size(), before.size());
 
-    before.remove(index);
+    before.remove(modifiedGroup);
     before.add(group);
-    Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
-    //Assert.assertEquals( new HashSet<>(before), new HashSet<>(after));
 
 
   }
