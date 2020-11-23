@@ -235,6 +235,12 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.cssSelector("[alt = Edit]")).get(index).click();
 
   }
+
+  public void initContactModificationById(int id) {
+
+   wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"'] img[alt='Edit']")).click();
+
+  }
   public void submitContactModification() {
 
     click(By.name("update"));
@@ -250,8 +256,8 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
-  public void modify(int index, ContactData contact, boolean b) {
-    initContactModification(index);
+  public void modify(ContactData contact, boolean b) {
+    initContactModificationById(contact.getId());
     fillContactForm(contact, b);
     submitContactModification();
     returnToHomePage();
