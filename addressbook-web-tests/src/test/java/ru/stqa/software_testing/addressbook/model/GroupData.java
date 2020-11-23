@@ -47,9 +47,9 @@ public class GroupData {
     return footer;
   }
 
-  public GroupData withId(int max) {
+  public GroupData withId(int id) {
 
-    this.id = max;
+    this.id = id;
     return this;
   }
 

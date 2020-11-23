@@ -5,6 +5,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
+import ru.stqa.software_testing.addressbook.model.Contacts;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -264,9 +265,9 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public Set<ContactData> set() {
+  public Contacts set() {
 
-    Set<ContactData> contacts = new HashSet<>();
+    Contacts contacts = new Contacts();
     List<WebElement> elementsTR = wd.findElements(By.cssSelector("[name = entry]"));//xpath(//tr[@name = 'entry'])
     for (WebElement element : elementsTR){
 

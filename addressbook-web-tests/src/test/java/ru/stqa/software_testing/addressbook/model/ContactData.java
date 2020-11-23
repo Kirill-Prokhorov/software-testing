@@ -3,6 +3,7 @@ package ru.stqa.software_testing.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
+
   public int id = Integer.MAX_VALUE;
   public String firstname = null;;
   public String middlename = null;;
@@ -121,9 +122,10 @@ public class ContactData {
     return notes;
   }
 
-  public  int getId() {
+  public int getId() {
     return id;
   }
+
   @Override
   public String toString() {
     return "ContactData{" +
@@ -148,6 +150,8 @@ public class ContactData {
   public int hashCode() {
     return Objects.hash(id, firstname, lastname);
   }
+
+
 
   public ContactData withId(int id) {
     this.id = id;
@@ -188,5 +192,6 @@ public class ContactData {
     this.email3 = email3;
     return this;
   }
+
 
 }
