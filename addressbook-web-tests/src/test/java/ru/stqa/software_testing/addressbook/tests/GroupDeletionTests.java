@@ -3,8 +3,6 @@ package ru.stqa.software_testing.addressbook.tests;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.GroupData;
-
-import java.util.List;
 import java.util.Set;
 
 
@@ -13,7 +11,7 @@ public class GroupDeletionTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
     application.goTo().groupPage();
-    if(! application.group().isThereAGroup()){
+    if(application.group().set().size() == 0){
       application.group().create(new GroupData().withName("test1").withFooter("test3"));
     }
     application.goTo().groupPage();

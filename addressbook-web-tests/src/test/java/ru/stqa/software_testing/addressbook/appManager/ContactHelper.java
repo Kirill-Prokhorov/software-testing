@@ -238,7 +238,7 @@ public class ContactHelper extends HelperBase {
 
   public void initContactModificationById(int id) {
 
-   wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"'] img[alt='Edit']")).click();
+   wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"")).click();
 
   }
   public void submitContactModification() {
@@ -263,23 +263,6 @@ public class ContactHelper extends HelperBase {
     returnToHomePage();
   }
 
-
-  public List<ContactData> list() {
-
-    List<ContactData> contacts = new ArrayList<>();
-    List<WebElement> elementsTR = wd.findElements(By.cssSelector("[name = entry]"));//xpath(//tr[@name = 'entry'])
-    for (WebElement element : elementsTR){
-
-      List<WebElement> elementsTD = element.findElements(By.cssSelector("td"));
-        String lastname = elementsTD.get(1).getText();
-        String firstname = elementsTD.get(2).getText();
-        int id = Integer.parseInt(elementsTD.get(0).findElement(By.tagName("input")).getAttribute("value"));
-        contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
-
-
-    }
-    return contacts;
-  }
 
   public Set<ContactData> set() {
 
