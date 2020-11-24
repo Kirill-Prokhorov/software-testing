@@ -1,7 +1,5 @@
 package ru.stqa.software_testing.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.software_testing.addressbook.model.ContactData;
@@ -30,14 +28,14 @@ public class ContactModificationTests extends TestBase {
   public void testContactModification() {
 
 
-    Set<ContactData> before = application.contact().set();
+    Contacts before = application.contact().set();
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Changed").withLastname("Changed Last");
     application.contact().modify(contact, false);
     application.goTo().homePage();
     Set<ContactData> after = application.contact().set();
     assertThat (after.size(), equalTo(before.size()));
-    assertThat(after, equalTo(((Contacts) before).withOut(modifiedContact).withAdded(contact)));
+    assertThat(after, equalTo((before).withOut(modifiedContact).withAdded(contact)));
 
 
 

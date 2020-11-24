@@ -1,17 +1,11 @@
 package ru.stqa.software_testing.addressbook.appManager;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
-import ru.stqa.software_testing.addressbook.model.GroupData;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.testng.Assert.assertTrue;
 
@@ -255,19 +249,26 @@ public class ContactHelper extends HelperBase {
     initContactCreation();
     fillContactForm(contact, b);
     submitContactCreation();
+    contactsCache = null;
+
   }
 
   public void modify(ContactData contact, boolean b) {
     initContactModificationById(contact.getId());
     fillContactForm(contact, b);
     submitContactModification();
+    contactsCache = null;
     returnToHomePage();
   }
 
+  private Contacts contactsCache = null;
 
   public Contacts set() {
 
-    Contacts contacts = new Contacts();
+    if(contactsCache != null){
+      return new Contacts(contactsCache);
+    }
+    contactsCache = new Contacts();
     List<WebElement> elementsTR = wd.findElements(By.cssSelector("[name = entry]"));//xpath(//tr[@name = 'entry'])
     for (WebElement element : elementsTR){
 
@@ -275,11 +276,10 @@ public class ContactHelper extends HelperBase {
       String lastname = elementsTD.get(1).getText();
       String firstname = elementsTD.get(2).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contacts.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
-
+      contactsCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
 
     }
-    return contacts;
+    return new Contacts(contactsCache);
   }
 
   public void selectContact(int index) {
@@ -287,15 +287,16 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
 
   }
-  public void selectContactbyId(int id) {
+  public void selectContactById(int id) {
 
     wd.findElement(By.cssSelector("input[ value = '" + id + "'")).click();
 
   }
 
   public void delete(ContactData contact) {
-    selectContactbyId(contact.getId());
+    selectContactById(contact.getId());
     deleteSelectedContact();
+    contactsCache = null;
   }
 
   public void delete(int index) {
