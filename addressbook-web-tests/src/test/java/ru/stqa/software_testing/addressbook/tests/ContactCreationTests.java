@@ -8,7 +8,6 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactCreationTests extends TestBase {
 
@@ -32,7 +31,7 @@ public class ContactCreationTests extends TestBase {
     application.goTo().homePage();
 
     Contacts after = application.contact().set();
-    assertEquals( after.size(), before.size()+1);
+    assertThat( after.size(), equalTo(before.size()+1));
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
 

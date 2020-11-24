@@ -1,6 +1,5 @@
 package ru.stqa.software_testing.addressbook.tests;
 
-import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.Groups;
@@ -21,7 +20,7 @@ public class GroupCreationTests extends TestBase {
     application.group().create(group);
     application.goTo().groupPage();
     Groups after = application.group().set();
-    Assert.assertEquals( after.size(), before.size()+1);
+    assertThat( after.size(), equalTo(before.size()+1));
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt(GroupData::getId).max().getAsInt()))));
   }
 

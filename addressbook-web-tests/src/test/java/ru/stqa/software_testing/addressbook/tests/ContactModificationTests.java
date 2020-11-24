@@ -9,7 +9,8 @@ import ru.stqa.software_testing.addressbook.model.Contacts;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import java.util.Set;
 
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactModificationTests extends TestBase {
   @BeforeMethod
@@ -35,8 +36,8 @@ public class ContactModificationTests extends TestBase {
     application.contact().modify(contact, false);
     application.goTo().homePage();
     Set<ContactData> after = application.contact().set();
-    assertEquals( after.size(), before.size());
-    MatcherAssert.assertThat(after, CoreMatchers.equalTo(((Contacts) before).withOut(modifiedContact).withAdded(contact)));
+    assertThat (after.size(), equalTo(before.size()));
+    assertThat(after, equalTo(((Contacts) before).withOut(modifiedContact).withAdded(contact)));
 
 
 
