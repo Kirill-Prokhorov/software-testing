@@ -1,14 +1,12 @@
 package ru.stqa.software_testing.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
 import ru.stqa.software_testing.addressbook.model.GroupData;
-import java.util.Set;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
@@ -38,7 +36,7 @@ public class ContactDeletionTests extends TestBase {
     assertEquals( after.size(), before.size()-1);
     before.remove(deletedContact);
     assertEquals(before, after);
-    MatcherAssert.assertThat(after,CoreMatchers.equalTo(before.withOut(deletedContact)));
+    assertThat(after, equalTo(before.withOut(deletedContact)));
 
 
 
