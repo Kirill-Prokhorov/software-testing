@@ -7,8 +7,6 @@ import ru.stqa.software_testing.addressbook.model.Contacts;
 
 import java.util.List;
 
-import static org.testng.Assert.assertTrue;
-
 public class ContactHelper extends HelperBase {
 
 
@@ -28,6 +26,10 @@ public class ContactHelper extends HelperBase {
 
     firstName(contactData.getFirstname());
     lastName(contactData.getLastname());
+    mobilePhone(contactData.getMobilePhone());
+    homePhone(contactData.getHomePhone());
+    workPhone(contactData.getWorkPhone());
+
 
     if(creation){
       addContactToGroup(contactData.getGroupContact());
@@ -35,34 +37,6 @@ public class ContactHelper extends HelperBase {
     else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
-
-  }
-
-  public void fillFullContactForm(ContactData contactData) {
-
-    firstName(contactData.getFirstname());
-    middleName(contactData.getMiddleName());
-    lastName(contactData.getLastname());
-    middleName(contactData.getMiddleName());
-    lastName(contactData.getLastname());
-    nick(contactData.getNick());
-    title(contactData.getTitle());
-    company(contactData.getCompany());
-    companyAddress(contactData.getCompanyAddress());
-    homePhone(contactData.getHomePhone());
-    mobilePhone(contactData.getMobilePhone());
-    workPhone(contactData.getWorkPhone());
-    fax(contactData.getFax());
-    email1(contactData.getEmail1());
-    email2(contactData.getEmail2());
-    email3(contactData.getEmail3());
-    homepage(contactData.getHomepage());
-    bDay(contactData.getDayOfMonth(), contactData.getMonth(), contactData.getYearBDay());
-    aDay(contactData.getDayOfMonth(), contactData.getMonth(), contactData.getYearADay());
-    addContactToGroup(contactData.getGroupContact());
-    homeAddress(contactData.getHomeAddress());
-    numberHouse(contactData.getHouseAddress());
-    notes(contactData.getNotes());
 
   }
 
@@ -234,6 +208,8 @@ public class ContactHelper extends HelperBase {
   public void initContactModificationById(int id) {
 
    wd.findElement(By.cssSelector("a[href='edit.php?id="+ id +"")).click();
+   //wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+
 
   }
   public void submitContactModification() {
@@ -273,10 +249,13 @@ public class ContactHelper extends HelperBase {
     for (WebElement element : elementsTR){
 
       List<WebElement> elementsTD = element.findElements(By.cssSelector("td"));
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String lastname = elementsTD.get(1).getText();
       String firstname = elementsTD.get(2).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      contactsCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname));
+      String allPhones = elementsTD.get(5).getText();
+      String[] phones = allPhones.split("\n");
+      contactsCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+              .withHomePhone(phones[0]).withMobilePhone(phones[1]).withWorkPhone(phones[2]));
 
     }
     return new Contacts(contactsCache);
@@ -306,5 +285,18 @@ public class ContactHelper extends HelperBase {
   public void delete(int index) {
     selectContact(index);
     deleteSelectedContact();
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    initContactModificationById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+    String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
+    String workPhone = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withHomePhone(homePhone)
+            .withMobilePhone(mobilePhone).withWorkPhone(workPhone);
+
   }
 }
