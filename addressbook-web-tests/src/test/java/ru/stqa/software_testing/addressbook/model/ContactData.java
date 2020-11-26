@@ -4,30 +4,31 @@ import java.util.Objects;
 
 public class ContactData {
 
-  public int id = Integer.MAX_VALUE;
-  public String firstname = null;;
-  public String middlename = null;;
-  public String lastname = null;;
-  public String nick = null;;
-  public String title = null;;
-  public String company = null;;
-  public String companyAddress = null;;
-  public String homePhone = null;;
-  public String mobilePhone = null;;
-  public String workPhone = null;;
-  public String fax = null;;
-  public String email1 = null;;
-  public String email2 = null;;
-  public String email3 = null;;
-  public String homepage = null;;
-  public String dayOfMonth = null;;
-  public String month = null;;
-  public String yearBday = null;;
-  public String yearAday = null;;
-  public String groupContact = "[none]";;
-  public String homeAddress = null;;
-  public String houseaddress = null;;
-  public String notes = null;
+  public int id;
+  public String firstname;
+  public String middleName;
+  public String lastname;
+  public String nick;
+  public String title;
+  public String company;
+  public String companyAddress;
+  public String homePhone;
+  public String mobilePhone;
+  public String workPhone;
+  public String allPhones;
+  public String fax;
+  public String email1;
+  public String email2;
+  public String email3;
+  public String homepage;
+  public String dayOfMonth;
+  public String month;
+  public String yearBday;
+  public String yearAday;
+  public String groupContact = "[none]";
+  public String homeAddress;
+  public String houseAddress;
+  public String notes;
 
 
   public String getFirstname() {
@@ -35,7 +36,7 @@ public class ContactData {
   }
 
   public String getMiddleName() {
-    return middlename;
+    return middleName;
   }
 
   public String getLastname() {
@@ -57,6 +58,16 @@ public class ContactData {
   public String getCompanyAddress() {
     return companyAddress;
   }
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
 
   public String getHomePhone() {
     return homePhone;
@@ -115,7 +126,7 @@ public class ContactData {
   }
 
   public String getHouseAddress() {
-    return houseaddress;
+    return houseAddress;
   }
 
   public String getNotes() {
@@ -183,12 +194,8 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withNick(String nick) {
-    this.nick = nick;
-    return this;
-  }
 
-   public ContactData withEmail1(String email1) {
+  public ContactData withEmail1(String email1) {
     this.email1 = email1;
     return this;
   }
@@ -202,6 +209,12 @@ public class ContactData {
     this.email3 = email3;
     return this;
   }
+
+  public ContactData withNick(String nick) {
+    this.nick = nick;
+    return this;
+  }
+
 
 
 }
