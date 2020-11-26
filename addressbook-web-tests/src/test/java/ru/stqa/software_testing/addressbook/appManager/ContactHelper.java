@@ -281,6 +281,10 @@ public class ContactHelper extends HelperBase {
     }
     return new Contacts(contactsCache);
   }
+  public int count (){
+    return wd.findElements(By.name("selected[]")).size();
+
+  }
 
   public void selectContact(int index) {
 
