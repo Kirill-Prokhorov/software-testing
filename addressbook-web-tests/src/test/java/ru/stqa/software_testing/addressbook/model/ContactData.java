@@ -136,6 +136,21 @@ public class ContactData {
   }
 
 
+  public ContactData withMobilePhone(String mobilePhone) {
+    this.mobilePhone = mobilePhone;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String workPhone) {
+    this.workPhone = workPhone;
+    return this;
+  }
+
+  public ContactData withHomePhone(String homePhone) {
+    this.homePhone = homePhone;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -173,12 +188,7 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withMobilePhone(String mobilePhone) {
-    this.mobilePhone = mobilePhone;
-    return this;
-  }
-
-  public ContactData withEmail1(String email1) {
+   public ContactData withEmail1(String email1) {
     this.email1 = email1;
     return this;
   }
