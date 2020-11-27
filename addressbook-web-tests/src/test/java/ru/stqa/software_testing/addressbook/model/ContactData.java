@@ -20,6 +20,7 @@ public class ContactData {
   public String email1;
   public String email2;
   public String email3;
+  public String allEmails;
   public String homepage;
   public String dayOfMonth;
   public String month;
@@ -63,11 +64,24 @@ public class ContactData {
     return allPhones;
   }
 
+  public ContactData withCompanyAddress(String companyAddress) {
+    this.companyAddress = companyAddress;
+    return this;
+  }
+
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
   }
 
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public ContactData withAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
 
   public String getHomePhone() {
     return homePhone;
@@ -81,10 +95,6 @@ public class ContactData {
     return workPhone;
   }
 
-  public String getFax() {
-    return fax;
-  }
-
   public String getEmail1() {
     return email1;
   }
@@ -95,6 +105,10 @@ public class ContactData {
 
   public String getEmail3() {
     return email3;
+  }
+
+  public String getFax() {
+    return fax;
   }
 
   public String getHomepage() {
