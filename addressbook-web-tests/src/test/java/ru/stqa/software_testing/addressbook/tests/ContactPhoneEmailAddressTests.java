@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
 
-public class ContactPhoneTests extends TestBase {
+public class ContactPhoneEmailAddressTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -32,13 +32,17 @@ public class ContactPhoneTests extends TestBase {
     ContactData contactInfoFromEditForm = application.contact().infoFromEditForm(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getCompanyAddress(), equalTo(contactInfoFromEditForm.getCompanyAddress().trim()));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+
+
 
   }
 
   private String mergePhones(ContactData contact) {
 
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s) -> !s.equals("")).map(ContactPhoneTests :: cleaned).collect(Collectors.joining("\n"));
+            .stream().filter((s) -> !s.equals("")).map(ContactPhoneEmailAddressTests :: cleaned).collect(Collectors.joining("\n"));
 
   }
 
@@ -48,24 +52,6 @@ public class ContactPhoneTests extends TestBase {
 
   }
 
-  @Test
-  public void testCompanyAddress(){
-    application.goTo().homePage();
-    ContactData contact = application.contact().set().iterator().next();
-    ContactData contactInfoFromEditForm = application.contact().infoFromEditForm(contact);
-    assertThat(contact.getCompanyAddress(), equalTo(contactInfoFromEditForm.getCompanyAddress().trim()));
-
-  }
-
-  @Test
-  public void testEmails() {
-    application.goTo().homePage();
-    ContactData contact = application.contact().set().iterator().next();
-    ContactData contactInfoFromEditForm = application.contact().infoFromEditForm(contact);
-    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
-
-
-  }
   private String mergeEmails(ContactData contact) {
 
     return Arrays.asList(contact.getEmail1(), contact.getEmail2(), contact.getEmail3())
