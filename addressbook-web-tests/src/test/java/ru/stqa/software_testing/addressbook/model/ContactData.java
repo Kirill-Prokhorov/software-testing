@@ -1,5 +1,6 @@
 package ru.stqa.software_testing.addressbook.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class ContactData {
@@ -30,7 +31,16 @@ public class ContactData {
   public String homeAddress;
   public String houseAddress;
   public String notes;
+  public File photo;
 
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public String getFirstname() {
     return firstname;

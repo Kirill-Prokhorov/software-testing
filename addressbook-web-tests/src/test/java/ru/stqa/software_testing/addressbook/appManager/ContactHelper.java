@@ -5,6 +5,7 @@ import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.List;
 
 public class ContactHelper extends HelperBase {
@@ -21,6 +22,9 @@ public class ContactHelper extends HelperBase {
     click(By.linkText("add new"));
 
   }
+  public void photo(File file){
+    attach(By.name("photo"), file);
+  }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
 
@@ -33,6 +37,9 @@ public class ContactHelper extends HelperBase {
     email1(contactData.getEmail1());
     email2(contactData.getEmail2());
     email3(contactData.getEmail3());
+    photo(contactData.getPhoto());
+
+
 
 
     if(creation){
