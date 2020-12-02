@@ -4,19 +4,29 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.Groups;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 
 public class GroupCreationTests extends TestBase {
 
+  @DataProvider
+  public Iterator<Object[]> validGroups(){
+    List<Object[]> list = new ArrayList<>();
+    list.add(new Object[] {new GroupData().withName("test1").withHeader("Header 1").withFooter("Footer 1")});
+    list.add(new Object[] {new GroupData().withName("test2").withHeader("Header 2").withFooter("Footer 2")});
+    list.add(new Object[] {new GroupData().withName("test3").withHeader("Header 3").withFooter("Footer 3")});
+    return list.iterator();
+  }
 
-  @Test
-  public void testGroupCreation() throws Exception {
 
-    String[] names = new String[] {"test1", "test2", "test3"};
-    for(String name : names){
-      GroupData group = new GroupData().withName(name);
+  @Test(dataProvider = "validGroups")
+  public void testGroupCreation(GroupData group) throws Exception {
+
       application.goTo().groupPage();
       Groups before = application.group().set();
       application.group().create(group);
@@ -24,7 +34,7 @@ public class GroupCreationTests extends TestBase {
       assertThat(application.group().count(), equalTo(before.size()+1));
       Groups after = application.group().set();
       assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt(GroupData::getId).max().getAsInt()))));
-    }
+
 
   }
 
