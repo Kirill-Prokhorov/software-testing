@@ -22,7 +22,7 @@ public class ContactDataGenerator {
 
   public static void main(String[] args) throws IOException {
     ContactDataGenerator generator = new ContactDataGenerator();
-    
+
     JCommander jCommander = new JCommander(generator);
     try {
       jCommander.parse(args);
