@@ -1,0 +1,20 @@
+<list>
+  <contacts>
+    <firstname>FirstName 0</firstname>
+    <lastname>LastName 0</lastname>
+    <companyAddress>Elm st, house № 0</companyAddress>
+    <groupContact>[none]</groupContact>
+  </contacts>
+  <contacts>
+    <firstname>FirstName 1</firstname>
+    <lastname>LastName 1</lastname>
+    <companyAddress>Elm st, house № 1</companyAddress>
+    <groupContact>[none]</groupContact>
+  </contacts>
+  <contacts>
+    <firstname>FirstName 2</firstname>
+    <lastname>LastName 2</lastname>
+    <companyAddress>Elm st, house № 2</companyAddress>
+    <groupContact>[none]</groupContact>
+  </contacts>
+</list>
