@@ -1,5 +1,6 @@
 package ru.stqa.software_testing.addressbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
@@ -12,12 +13,15 @@ public class ContactData {
 
   @XStreamOmitField
   public int id;
+  @Expose
   public String firstname;
   public String middleName;
+  @Expose
   public String lastname;
   public String nick;
   public String title;
   public String company;
+  @Expose
   public String companyAddress;
   public String homePhone;
   public String mobilePhone;

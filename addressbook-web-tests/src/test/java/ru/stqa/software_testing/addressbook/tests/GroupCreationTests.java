@@ -1,12 +1,13 @@
 package ru.stqa.software_testing.addressbook.tests;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.Groups;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,8 +34,22 @@ public class GroupCreationTests extends TestBase {
     return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
+  @DataProvider
+  public Iterator<Object[]> validGroupsJson() throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/Resources/groups.json")));
+    String json = "";
+    String line = reader.readLine();
+    while(line != null){
+      json += line;
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<GroupData> groups = gson.fromJson(json, new TypeToken<List<GroupData>>(){}.getType());
+        return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+  }
 
-  @Test(dataProvider = "validGroupsXML")
+
+  @Test(dataProvider = "validGroupsJson")
   public void testGroupCreation(GroupData group) throws Exception {
 
       application.goTo().groupPage();
