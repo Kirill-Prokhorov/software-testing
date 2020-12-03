@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.software_testing.addressbook.model.ContactData;
-import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -62,29 +61,29 @@ public class ContactDataGenerator {
   private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
     Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
     String json = gson.toJson(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try(Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
+
   }
 
   private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
     XStream xstream = new XStream();
     xstream.processAnnotations(ContactData.class);
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
-
+    try(Writer writer = new FileWriter(file)){
+      writer.write(xml);
+    }
   }
 
 
   private void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
 
-    Writer writer = new FileWriter(file);
-    for(ContactData contact : contacts){
-      writer.write(String.format("%s;%s;%s\n", contact.getFirstname(),contact.getLastname(), contact.getCompanyAddress()));
+    try(Writer writer = new FileWriter(file)){
+      for(ContactData contact : contacts){
+        writer.write(String.format("%s;%s;%s\n", contact.getFirstname(),contact.getLastname(), contact.getCompanyAddress()));
+      }
     }
-    writer.close();
   }
 
   private List<ContactData> generateContact(int count) {
