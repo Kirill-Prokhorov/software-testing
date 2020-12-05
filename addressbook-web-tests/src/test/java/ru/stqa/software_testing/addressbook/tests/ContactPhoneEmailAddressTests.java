@@ -3,7 +3,6 @@ package ru.stqa.software_testing.addressbook.tests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.software_testing.addressbook.model.ContactData;
-
 import java.util.Arrays;
 import java.util.stream.Collectors;
 

@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thoughtworks.xstream.XStream;
 import ru.stqa.software_testing.addressbook.model.ContactData;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

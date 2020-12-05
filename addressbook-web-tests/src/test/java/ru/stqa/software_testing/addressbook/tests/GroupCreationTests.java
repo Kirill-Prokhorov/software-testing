@@ -6,7 +6,6 @@ import com.thoughtworks.xstream.XStream;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import org.testng.annotations.*;
 import ru.stqa.software_testing.addressbook.model.Groups;
-
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;

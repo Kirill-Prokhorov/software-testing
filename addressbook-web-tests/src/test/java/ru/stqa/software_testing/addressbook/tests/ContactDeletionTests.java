@@ -8,6 +8,7 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+
 public class ContactDeletionTests extends TestBase {
 
   @BeforeMethod

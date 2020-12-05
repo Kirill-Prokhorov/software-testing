@@ -1,7 +1,6 @@
 package ru.stqa.software_testing.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
-
 import java.util.HashSet;
 import java.util.Set;
 
