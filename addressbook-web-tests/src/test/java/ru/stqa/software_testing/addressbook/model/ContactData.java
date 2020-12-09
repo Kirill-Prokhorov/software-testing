@@ -3,51 +3,91 @@ package ru.stqa.software_testing.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.checkerframework.checker.units.qual.C;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 @XStreamAlias("contacts")
+@Entity
+@Table(name="addressbook")
 
 public class ContactData {
 
   @XStreamOmitField
+  @Id
+  @Column(name="id")
+  @Type(type = "int")
   public int id;
   @Expose
+  @Column(name = "firstname")
   public String firstname;
+  @Transient
   public String middleName;
   @Expose
+  @Column(name = "lastname")
   public String lastname;
+  @Transient
   public String nick;
+  @Transient
   public String title;
+  @Transient
   public String company;
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   public String companyAddress;
+  @Column(name = "home")
+  @Type(type = "text")
   public String homePhone;
+  @Column(name = "mobile")
+  @Type(type = "text")
   public String mobilePhone;
+  @Column(name = "work")
+  @Type(type = "text")
   public String workPhone;
+  @Transient
   public String allPhones;
+  @Transient
   public String fax;
+  @Transient
   public String email1;
+  @Transient
   public String email2;
+  @Transient
   public String email3;
+  @Transient
   public String allEmails;
+  @Transient
   public String homepage;
+  @Transient
   public String dayOfMonth;
+  @Transient
   public String month;
+  @Transient
   public String yearBday;
+  @Transient
   public String yearAday;
+  @Transient
   public String groupContact = "[none]";
+  @Transient
   public String homeAddress;
+  @Transient
   public String houseAddress;
+  @Transient
   public String notes;
-  public File photo;
+  @Column(name = "photo")
+  @Type(type = "text")
+  public String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public ContactData withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
@@ -176,9 +216,12 @@ public class ContactData {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", companyAddress='" + companyAddress + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
             '}';
   }
-
 
   public ContactData withMobilePhone(String mobilePhone) {
     this.mobilePhone = mobilePhone;
