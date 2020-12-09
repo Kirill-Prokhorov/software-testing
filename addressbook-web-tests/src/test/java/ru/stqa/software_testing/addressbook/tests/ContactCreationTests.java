@@ -68,7 +68,7 @@ public class ContactCreationTests extends TestBase {
   }
 
 
-  @Test (dataProvider = "validContactsJson")
+  @Test (dataProvider = "validContactsXML")
   public void testContactCreation(ContactData contact) throws Exception {
 
       File photo = new File("src/test/Resources/Freddy.jpg");

@@ -52,7 +52,7 @@ public class GroupCreationTests extends TestBase {
   }
 
 
-  @Test(dataProvider = "validGroupsJson")
+  @Test(dataProvider = "validGroupsXML")
   public void testGroupCreation(GroupData group) throws Exception {
 
       application.goTo().groupPage();
