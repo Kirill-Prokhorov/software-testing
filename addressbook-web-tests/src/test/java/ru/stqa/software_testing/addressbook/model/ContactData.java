@@ -53,13 +53,13 @@ public class ContactData {
   public String companyAddress;
   @Column(name = "home")
   @Type(type = "text")
-  public String homePhone = "";
+  public String homePhone;
   @Column(name = "mobile")
   @Type(type = "text")
-  public String mobilePhone = "";
+  public String mobilePhone;
   @Column(name = "work")
   @Type(type = "text")
-  public String workPhone = "";
+  public String workPhone;
   @Transient
   public String allPhones;
   @Transient
