@@ -83,12 +83,16 @@ public class ContactData {
   public String photo;
 
   public File getPhoto() {
+
     return new File(photo);
+
   }
 
   public ContactData withPhoto(File photo) {
+
     this.photo = photo.getPath();
     return this;
+
   }
 
   public String getFirstname() {

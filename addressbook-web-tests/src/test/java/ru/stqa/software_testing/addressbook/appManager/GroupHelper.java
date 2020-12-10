@@ -49,6 +49,7 @@ public class GroupHelper extends HelperBase {
     initGroupCreation();
     fillGroupForm(group);
     submitGroupCreation();
+
     groupCache = null;
   }
 
@@ -57,10 +58,12 @@ public class GroupHelper extends HelperBase {
   }
 
   public void modify(GroupData group) {
+    new NavigationHelper(wd).groupPage();
     selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
+    new NavigationHelper(wd).groupPage();
     groupCache = null;
 
   }

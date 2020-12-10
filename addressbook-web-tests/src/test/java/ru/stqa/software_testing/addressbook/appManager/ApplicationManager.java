@@ -21,6 +21,7 @@ public class ApplicationManager {
   public NavigationHelper navigationHelper;
   public GroupHelper groupHelper;
   public ContactHelper contactHelper;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser)  {
     this.browser = browser;
@@ -33,6 +34,8 @@ public class ApplicationManager {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
 
+    dbHelper = new DbHelper();
+
     if(browser.equalsIgnoreCase(BrowserType.FIREFOX)){
       wd = new FirefoxDriver();
     }
@@ -43,7 +46,7 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
@@ -80,5 +83,10 @@ public class ApplicationManager {
 
   public ContactHelper contact() {
     return contactHelper;
+  }
+
+  public DbHelper db(){
+
+    return dbHelper;
   }
 }

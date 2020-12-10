@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
 import ru.stqa.software_testing.addressbook.model.GroupData;
+
+import java.io.File;
 import java.util.Set;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -34,7 +36,7 @@ public class ContactModificationTests extends TestBase {
     ContactData modifiedContact = before.iterator().next();
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Changed")
             .withLastname("Changed Last").withHomePhone("111").withMobilePhone("222").withWorkPhone("333")
-            .withCompanyAddress("  Elm st.  ").withEmail1("Fred@ ").withEmail2(" Kruger@").withEmail3("Nightmare@");
+            .withCompanyAddress("  Elm st.  ").withEmail1("Fred@ ").withEmail2(" Kruger@").withEmail3("Nightmare@").withPhoto(new File("src/test/Resources/Freddy.jpg"));
     application.contact().modify(contact, false);
     application.goTo().homePage();
     assertThat( application.contact().count(), equalTo(before.size()));

@@ -12,26 +12,26 @@ public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    application.goTo().groupPage();
-    if(application.group().set().size() == 0){
+    if(application.db().groups().size() == 0){
+
+      application.goTo().groupPage();
       application.group().create(new GroupData().withName("test1").withFooter("test3"));
+      application.goTo().groupPage();
+
     }
-    application.goTo().groupPage();
+
   }
 
   @Test
   public void groupModification() {
 
-
-
-    Groups before =  application.group().set();
+    Groups before =  application.db().groups();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
             .withId(modifiedGroup.getId()).withName("change1").withHeader("test").withFooter("change3");
     application.group().modify(group );
-    application.goTo().groupPage();
     assertThat(application.group().count(), equalTo(before.size()));
-    Groups after = application.group().set();
+    Groups after = application.db().groups();
     assertThat(after, equalTo(before.withOut(modifiedGroup).withAdded(group)));
 
 
