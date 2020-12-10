@@ -233,14 +233,18 @@ public class ContactHelper extends HelperBase {
   }
 
   public void create(ContactData contact, boolean b) {
+    new NavigationHelper(wd).homePage();
     initContactCreation();
     fillContactForm(contact, b);
     submitContactCreation();
     contactsCache = null;
+    new NavigationHelper(wd).homePage();
+
 
   }
 
   public void modify(ContactData contact, boolean b) {
+    new NavigationHelper(wd).homePage();
     initContactModificationById(contact.getId());
     fillContactForm(contact, b);
     submitContactModification();
@@ -290,9 +294,12 @@ public class ContactHelper extends HelperBase {
   }
 
   public void delete(ContactData contact) {
+    new NavigationHelper(wd).homePage();
     selectContactById(contact.getId());
     deleteSelectedContact();
     contactsCache = null;
+    new NavigationHelper(wd).homePage();
+
   }
 
   public void delete(int index) {

@@ -60,11 +60,9 @@ public class ContactCreationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    application.goTo().groupPage();
-    if(application.group().set().size() == 0){
+    if(application.db().groups().size() == 0){
       application.group().create(new GroupData().withName("Test").withFooter("test3"));
     }
-    application.goTo().homePage();
   }
 
 
@@ -73,11 +71,10 @@ public class ContactCreationTests extends TestBase {
 
       File photo = new File("src/test/Resources/Freddy.jpg");
       contact.withPhoto(photo);
-      Contacts before = application.contact().set();
+      Contacts before = application.db().contacts();
       application.contact().create(contact, true);
-      application.goTo().homePage();
       assertThat(application.contact().count(), equalTo(before.size() + 1));
-      Contacts after = application.contact().set();
+      Contacts after = application.db().contacts();
       assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
 
 

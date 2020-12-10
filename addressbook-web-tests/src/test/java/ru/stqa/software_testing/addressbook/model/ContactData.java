@@ -15,6 +15,18 @@ import java.util.Objects;
 @Table(name="addressbook")
 
 public class ContactData {
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ContactData that = (ContactData) o;
+    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(companyAddress, that.companyAddress) && Objects.equals(homePhone, that.homePhone) && Objects.equals(mobilePhone, that.mobilePhone) && Objects.equals(workPhone, that.workPhone);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, firstname, lastname, companyAddress, homePhone, mobilePhone, workPhone);
+  }
 
   @XStreamOmitField
   @Id
@@ -41,13 +53,13 @@ public class ContactData {
   public String companyAddress;
   @Column(name = "home")
   @Type(type = "text")
-  public String homePhone;
+  public String homePhone = "";
   @Column(name = "mobile")
   @Type(type = "text")
-  public String mobilePhone;
+  public String mobilePhone = "";
   @Column(name = "work")
   @Type(type = "text")
-  public String workPhone;
+  public String workPhone = "";
   @Transient
   public String allPhones;
   @Transient
@@ -241,22 +253,6 @@ public class ContactData {
     this.homePhone = homePhone;
     return this;
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ContactData that = (ContactData) o;
-    return id == that.id &&
-            Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
-  }
-
 
 
   public ContactData withId(int id) {
