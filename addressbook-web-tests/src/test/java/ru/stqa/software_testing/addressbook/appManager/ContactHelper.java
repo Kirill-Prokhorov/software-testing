@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
+import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.io.File;
 import java.util.List;
@@ -39,7 +40,7 @@ public class ContactHelper extends HelperBase {
     email1(contactData.getEmail1());
     email2(contactData.getEmail2());
     email3(contactData.getEmail3());
-    photo(contactData.getPhoto());
+    //photo(contactData.getPhoto());
 
     if(creation){
       if(contactData.getGroups().size() > 0){
@@ -87,6 +88,26 @@ public class ContactHelper extends HelperBase {
 
     findAndSelect(By.name("new_group"), groupName);
 
+  }
+  public void addToGroup(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    selectTargetGroup(group.getId());
+    submitAddToGroup();
+    goToContactList(group.getId());
+    toAll();
+  }
+  private void selectTargetGroup(int id) {
+    new Select(wd.findElement(By.name("to_group"))).selectByValue(String.valueOf(id));
+  }
+  private void submitAddToGroup() {
+    click(By.name("add"));
+  }
+  private void goToContactList(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='./?group=%s']", id))).click();
+  }
+
+  private void toAll() {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
   }
 
   public void aDay(String dayOfMonth, String month, String yearADay) {
@@ -328,4 +349,5 @@ public class ContactHelper extends HelperBase {
             .withEmail2(email2).withEmail3(email3).withCompanyAddress(companyAddress);
 
   }
+
 }

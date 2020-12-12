@@ -297,7 +297,7 @@ public class ContactData {
   }
 
 
-  public ContactData inGroup(GroupData group) {
+  public ContactData withGroup(GroupData group) {
     groups.add(group);
     return this;
   }

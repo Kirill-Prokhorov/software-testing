@@ -11,6 +11,7 @@ import ru.stqa.software_testing.addressbook.model.GroupData;
 import ru.stqa.software_testing.addressbook.model.Groups;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DbHelper {
 
@@ -33,6 +34,15 @@ public class DbHelper {
     return new Groups(result);
   }
 
+  public GroupData group(int id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<GroupData> result = session.createQuery(String.format("from GroupData where group_id=%s", id) ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Groups(result).iterator().next();
+  }
+
   public Contacts contacts(){
     Session session = sessionFactory.openSession();
     session.beginTransaction();
@@ -40,5 +50,14 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
+  }
+
+  public ContactData contact(int id) {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery(String.format("from ContactData where id=%s", id) ).list();
+    session.getTransaction().commit();
+    session.close();
+    return new Contacts(result).iterator().next();
   }
 }
