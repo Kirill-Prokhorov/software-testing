@@ -4,7 +4,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
-import ru.stqa.software_testing.addressbook.model.GroupData;
 
 import java.io.File;
 import java.util.Set;

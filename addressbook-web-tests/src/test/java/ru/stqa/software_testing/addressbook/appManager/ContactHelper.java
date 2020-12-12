@@ -56,7 +56,23 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void removeFromGroup(GroupData group, ContactData contact) {
+    selectSourceGroup(group.getId());
+    selectContactById(contact.getId());
+    submitRemoveFromGroup();
+    goToContactList(group.getId());
+    resetFilterByGroup();
+  }
 
+  private void selectSourceGroup(int id) {
+    new Select(wd.findElement(By.name("group"))).selectByValue(String.valueOf(id));
+  }
+  private void submitRemoveFromGroup() {
+    click(By.name("remove"));
+  }
+  private void resetFilterByGroup() {
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+  }
 
   public void deleteSelectedContact() {
 
@@ -133,6 +149,7 @@ public class ContactHelper extends HelperBase {
     type(By.name("byear"), yearBDay);
 
   }
+
 
   public void returnToHomePage() {
 
