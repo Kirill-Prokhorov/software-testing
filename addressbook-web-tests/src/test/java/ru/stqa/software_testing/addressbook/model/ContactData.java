@@ -8,7 +8,9 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @XStreamAlias("contacts")
 @Entity
@@ -82,8 +84,15 @@ public class ContactData {
   public String yearBday;
   @Transient
   public String yearAday;
-  @Transient
-  public String groupContact = "[none]";
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn(name = "id"),inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<>();
   @Transient
   public String homeAddress;
   @Transient
@@ -206,10 +215,6 @@ public class ContactData {
     return yearAday;
   }
 
-  public String getGroupContact() {
-    return groupContact;
-  }
-
   public String getHomeAddress() {
     return homeAddress;
   }
@@ -292,5 +297,8 @@ public class ContactData {
   }
 
 
-
+  public ContactData inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }

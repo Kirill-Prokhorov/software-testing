@@ -1,6 +1,8 @@
 package ru.stqa.software_testing.addressbook.appManager;
 
+
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.Contacts;
@@ -39,11 +41,13 @@ public class ContactHelper extends HelperBase {
     email3(contactData.getEmail3());
     photo(contactData.getPhoto());
 
-
-
-
     if(creation){
-      addContactToGroup(contactData.getGroupContact());
+      if(contactData.getGroups().size() > 0){
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        //new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroups().iterator().next().getName());
+        addContactToGroup(contactData.getGroups().iterator().next().getName());
+      }
+
     }
     else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
