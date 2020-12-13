@@ -13,8 +13,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class AddContactToGroupTests extends TestBase {
-
-
   @BeforeMethod
   public void ensurePreconditions() {
 
@@ -54,7 +52,7 @@ public class AddContactToGroupTests extends TestBase {
     }
     GroupData group = groupListOutOfThisContacts.iterator().next();
     Contacts beforeContacts = group.getContacts();
-    Groups beforeGroups = contact.getGroups();
+    Groups beforeGroups = application.db().contact(contact.getId()).getGroups();
     application.goTo().homePage();
     application.contact().addToGroup(contact, group);
     Contacts afterContacts = application.db().group(group.getId()).getContacts();
