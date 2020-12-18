@@ -6,6 +6,6 @@
     <homePhone>110</homePhone>
     <mobilePhone>220</mobilePhone>
     <workPhone>330</workPhone>
-    <groupContact>[none]</groupContact>
+    <groups/>
   </contacts>
 </list>

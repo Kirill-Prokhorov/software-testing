@@ -71,11 +71,11 @@ public class ContactCreationTests extends TestBase {
   @Test (dataProvider = "validContactsXML")
   public void testContactCreation(ContactData contact) throws Exception {
 
-    Groups allGroups = application.db().groups();
+    //Groups allGroups = application.db().groups();
     File photo = new File("src/test/Resources/Freddy.jpg");
     contact.withPhoto(photo);
     Contacts before = application.db().contacts();
-    application.contact().create(contact.withGroup(allGroups.iterator().next()), true);
+    application.contact().create(contact, true);
     assertThat(application.contact().count(), equalTo(before.size() + 1));
     Contacts after = application.db().contacts();
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
