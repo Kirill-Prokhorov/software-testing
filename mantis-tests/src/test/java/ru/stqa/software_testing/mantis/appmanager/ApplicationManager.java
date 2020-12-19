@@ -26,7 +26,7 @@ public class ApplicationManager {
   public void init() throws IOException {
 
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(String.format("src/test/Resources/%s.properties", target)));
+    properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
 
     if(browser.equalsIgnoreCase(BrowserType.FIREFOX)){
       wd = new FirefoxDriver();
@@ -48,4 +48,13 @@ public class ApplicationManager {
     wd.quit();
   }
 
+  public HttpSession newHttpSession(){
+    return new HttpSession(this);
   }
+
+  public String getProperty(String key) {
+
+    return properties.getProperty(key);
+
+  }
+}
