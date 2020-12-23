@@ -5,7 +5,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.testng:testng:7.3.0'
+    implementation 'org.testng:testng:7.0.0'
+}
+
+test {
+    useTestNG()
 }
 
 buildscript{
@@ -23,7 +27,7 @@ apply plugin: 'no.nils.wsdl2java'
 wsdl2java {
     wsdlDir = file("src/main/resources") // define to support incremental build
     wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
-                          ['src/main/resources/ipservice.wsdl'],
+                          ['src/main/resources/ipservice.wsdl']
     ]
 
 }
