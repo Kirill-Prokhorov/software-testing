@@ -14,7 +14,7 @@ public class DbHelper {
 
   private final SessionFactory sessionFactory;
 
-  public DbHelper(ApplicationManager applicationManager) {
+  public DbHelper(ApplicationManager app) {
 
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
             .configure().build();
