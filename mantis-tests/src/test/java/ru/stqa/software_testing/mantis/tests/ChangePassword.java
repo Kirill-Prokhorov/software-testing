@@ -8,6 +8,7 @@ import ru.stqa.software_testing.mantis.model.User;
 import ru.stqa.software_testing.mantis.model.Users;
 
 import javax.mail.MessagingException;
+import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.util.List;
 
@@ -16,7 +17,8 @@ import static org.testng.Assert.assertTrue;
 public class ChangePassword extends TestBase {
 
   @BeforeMethod
-  public void ensurePrecondition() throws MessagingException, IOException {
+  public void ensurePrecondition() throws MessagingException, IOException, ServiceException {
+    skipIfNotFixedBugify(app.rest().getIssueId());
     if(app.db().users().size() == 1)
     { long now = System.currentTimeMillis();
       String email = String.format("user%s@localhost", now);
