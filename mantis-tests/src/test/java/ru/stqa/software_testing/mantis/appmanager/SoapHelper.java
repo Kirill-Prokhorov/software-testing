@@ -64,8 +64,9 @@ public class SoapHelper {
             , app.getProperty("mantis.soap.adminPassword"), "mantis");
     IssueData[] issues = mc.mc_project_get_issues(app.getProperty("mantis.soap.adminLogin")
             , app.getProperty("mantis.soap.adminPassword"), projectId, BigInteger.valueOf(1), BigInteger.valueOf(0));
-    Random random = new Random();
-    return Arrays.asList(issues).get(random.nextInt(issues.length)).getId().intValue();
+   // Random random = new Random();
+   // return Arrays.asList(issues).get(random.nextInt(issues.length)).getId().intValue();
+    return issues[0].getId().intValue();
 
   }
 
