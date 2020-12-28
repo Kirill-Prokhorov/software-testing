@@ -28,7 +28,7 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsXML() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader("src/test/Resources/contacts.xml"))){
+    try(BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.xml"))){
       String xml = "";
       String line = reader.readLine();
       while(line != null){
@@ -46,7 +46,7 @@ public class ContactCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validContactsJson() throws IOException {
-    try(BufferedReader reader = new BufferedReader(new FileReader("src/test/Resources/contacts.json"))){
+    try(BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))){
       String json = "";
       String line = reader.readLine();
       while(line != null){
@@ -72,7 +72,7 @@ public class ContactCreationTests extends TestBase {
   public void testContactCreation(ContactData contact) throws Exception {
 
     //Groups allGroups = application.db().groups();
-    File photo = new File("src/test/Resources/Freddy.jpg");
+    File photo = new File("src/test/resources/Freddy.jpg");
     contact.withPhoto(photo);
     Contacts before = application.db().contacts();
     application.contact().create(contact, true);

@@ -32,7 +32,7 @@ public class ApplicationManager {
   public void init() throws IOException {
 
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(String.format("src/test/Resources/%s.properties", target)));
+    properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
 
     dbHelper = new DbHelper();
 
@@ -46,7 +46,7 @@ public class ApplicationManager {
       wd = new InternetExplorerDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     groupHelper = new GroupHelper(wd);
     navigationHelper = new NavigationHelper(wd);
