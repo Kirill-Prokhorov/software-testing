@@ -7,10 +7,12 @@ import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import ru.stqa.software_testing.addressbook.appManager.ApplicationManager;
+import ru.stqa.software_testing.addressbook.model.ContactData;
 import ru.stqa.software_testing.addressbook.model.GroupData;
 import ru.stqa.software_testing.addressbook.model.Groups;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,6 +44,19 @@ public class TestBase {
 
     }
 
+  }
+  public void verifyContactListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Set<ContactData> dbContacts = application.db().contacts().stream()
+              .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname())
+                      .withLastname(c.getLastname()).withCompanyAddress((c.getCompanyAddress())))
+              .collect(Collectors.toSet());
+      Set<ContactData> uiContacts = application.contact().set().stream()
+              .map((c) -> new ContactData().withId(c.getId()).withFirstname(c.getFirstname())
+                      .withLastname(c.getLastname()).withCompanyAddress(c.getCompanyAddress()))
+              .collect(Collectors.toSet());
+      MatcherAssert.assertThat(uiContacts, equalTo(dbContacts));
+    }
   }
 
 }
